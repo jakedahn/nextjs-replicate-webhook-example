@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["replicate.delivery"],
+    domains: ['replicate.delivery'],
   },
-};
+}
 
-export default nextConfig;
+module.exports = nextConfig

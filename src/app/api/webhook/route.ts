@@ -17,6 +17,7 @@ export async function POST(request: Request) {
     const isValid = await validateWebhook(request.clone(), webhookSecret);
 
     if (!isValid) {
+      console.error("Invalid webhook signature");
       return NextResponse.json(
         { error: "Invalid webhook signature" },
         { status: 401 }
@@ -24,7 +25,10 @@ export async function POST(request: Request) {
     }
 
     const payload = await request.json();
-    console.log("Received valid webhook:", payload);
+    console.log(
+      "Received valid webhook payload:",
+      JSON.stringify(payload, null, 2)
+    );
 
     // Send the webhook payload to all connected clients
     sendEventToAll(payload);
